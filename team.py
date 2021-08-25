@@ -2,17 +2,69 @@ import requests
 
 
 def team_search():
-    team_number = input("""
-    What Team Would You Like To Know More About?
 
-    -Type 1 for New Jersey Devils
-    -Type 2 for New York Islanders
-    -Type 3 for New York Rangers
-    -Type 4 for Philadelphia Flyers
-    -Type 5 for Pittsburgh Penguins
-    -Type 6 for Boston Bruins
-    -Type 7 for Buffalo Sabres
-    -Type 8 for Montreal Canadians
+    division_query = input("""
+    What Division Would You Like To Look At?
+    -Type 1 for Atlantic 
+    -Type 2 for Metropolitan
+    -Type 3 for Central 
+    -Type 4 for Pacific 
+    """)
+
+    if division_query == '1':
+        team_number = input("""
+            What Team Would You Like To Know More About?
+        
+            -Type 6 for Boston Bruins
+            -Type 7 for Buffalo Sabres
+            -Type 8 for Montreal Canadians
+            -Type 9 for Ottawa Senators
+            -Type 10 for Toronto Maple Leafs
+            -Type 13 for Florida Panthers
+            -Type 14 for Tampa Bay Lightning
+            -Type 17 for Detroit Red Wings
+        """)
+
+    if division_query == '2':
+        team_number = input("""
+            What Team Would You Like To Know More About?
+            
+            -Type 1 for New Jersey Devils
+            -Type 2 for New York Islanders
+            -Type 3 for New York Rangers
+            -Type 4 for Philadelphia Flyers
+            -Type 5 for Pittsburgh Penguins
+            -Type 12 for Carolina Hurricanes
+            -Type 15 for Washington Capitals
+            -Type 29 for Columbus Blue Jackets
+        """)
+
+    if division_query == '3':
+        team_number = input("""
+            What Team Would You Like To Know More About?
+                
+            -Type 16 for Chicago Blackhawks
+            -Type 18 for Nashville Predators
+            -Type 19 for St. Louis Blues
+            -Type 21 for Colorado Avalanche
+            -Type 25 for Dallas Stars
+            -Type 30 for Minnesota Wild
+            -Type 52 for Winnipeg Jets
+            -Type 53 for Arizona Coyotes
+        """)
+
+    if division_query == '4':
+        team_number = input("""
+        What Team Would You Like To Know More About?
+                
+        -Type 20 for Calgary Flames
+        -Type 22 for Edmonton Oilers
+        -Type 23 for Vancouver Canucks
+        -Type 24 for Anaheim Ducks
+        -Type 26 for Los Angeles Kings
+        -Type 28 for San Jose Sharks
+        -Type 54 for Vegas Golden Knights
+        -Type 55 for Seattle Kraken
     :
     """)
 
@@ -23,7 +75,6 @@ def team_search():
 
     team_list = json_data['teams']
     roster_list = roster_json_data['roster']
-
 
     for i in team_list:
         print(
@@ -69,18 +120,4 @@ def team_search():
                  height = (a['height'])
 
             print(full_name + ": " + "\n" + "ID: " + player_id + "\n" + "Height: " + height + "\n" + "Goals: " + x)
-
-
-
-
-
-
-
-
-
-    #print(roster_list[0]['person']['fullName'])
-    #print(roster_list[1]['person']['fullName'])
-
-
-
 
