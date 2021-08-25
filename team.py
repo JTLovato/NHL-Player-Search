@@ -84,10 +84,10 @@ def team_search():
         )
 
     for x in roster_list:
-        y = (x['person']['fullName'])
-        print(y)
+        players = (x['person']['fullName'])
+        print(players)
 
-    player_query = input("What player Would You Like To Know More About? ")
+    player_query = input("\n What player Would You Like To Know More About? ")
 
     for x in roster_list:
         full_name = (x['person']['fullName'])
@@ -99,12 +99,21 @@ def team_search():
             player_json_data = requests.get(roster_api_player).json()
             individual_player = player_json_data['people']
 
-            season = input("""
+            season = input(f"""
+            You chose {player_query}
+            
             What Season would you Like to Specify?
             -20202021
             -20192020
             -20182019
             -20172018
+            -20162017
+            -20152016
+            -20142015
+            -20132014
+            -20122013
+            -20112012
+            -20102011
             """)
 
             roster_api_stats = "https://statsapi.web.nhl.com/api/v1/people/" + player_id + "/stats?stats=statsSingleSeason&season=" + season
@@ -113,11 +122,25 @@ def team_search():
             for stat in individual_stats:
                 all_stats = stat['splits']
 
-            x = str(all_stats)
-
+            stat_list = str(all_stats)
 
             for a in individual_player:
-                 height = (a['height'])
+                height = (a['height'])
+            if stat_list == '[]':
+                print("Sorry, There's no info on that year for that player.")
+            else:
+                print(full_name + ": " + "\n" + "ID: " + player_id + "\n" + "Height: " + height + "\n" + "Stats: " + stat_list)
 
-            print(full_name + ": " + "\n" + "ID: " + player_id + "\n" + "Height: " + height + "\n" + "Goals: " + x)
+
+
+
+
+
+
+
+
+
+
+
+
 
