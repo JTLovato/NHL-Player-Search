@@ -1,6 +1,9 @@
-import requests
+ 
 from team import team_search
 
+#First thing user sees.
+#Asks user how they'd like to search
+#Currently only option avaliable is: Team Search
 
 def getNHLTeam():
     first_query = input("""
@@ -16,6 +19,10 @@ def getNHLTeam():
         -'Q' to quit at anytime
         
     """).capitalize()
+
+    #User can type 'q' at anty time to quit the program
+    #User selects how to search for a player
+    #Currently only option is to search by team
 
     while first_query != 'q':
         if first_query == 'T':

@@ -1,7 +1,11 @@
 import requests
 
+#Searching By Team
 
 def team_search():
+
+    #Asks user which division to search, so 
+    #a 32 team list isn't shown onto the screen all at once.
 
     division_query = input("""
     What Division Would You Like To Look At?
@@ -10,6 +14,8 @@ def team_search():
     -Type 3 for Central 
     -Type 4 for Pacific 
     """)
+
+    #TODO: Change the numbers (which are the base IDs from the NHL API) to actual selectors
 
     if division_query == '1':
         team_number = input("""
@@ -68,6 +74,8 @@ def team_search():
     :
     """)
 
+    #Selected number pulls up requested team
+    #Pulls up roster of team as well
     api = "https://statsapi.web.nhl.com/api/v1/teams/" + team_number
     json_data = requests.get(api).json()
     roster_api = "https://statsapi.web.nhl.com/api/v1/teams/" + team_number + "/roster"
@@ -76,6 +84,7 @@ def team_search():
     team_list = json_data['teams']
     roster_list = roster_json_data['roster']
 
+    #Some Team Info
     for i in team_list:
         print(
             i['name'] + "\n",
@@ -83,18 +92,23 @@ def team_search():
             i['venue']['name'] + "\n"
         )
 
+    #Presents Entire Roster
     for x in roster_list:
         players = (x['person']['fullName'])
         print(players)
 
     player_query = input("\n What player Would You Like To Know More About? ")
 
+    #Goes over roster and checks to see if player is on team.
     for x in roster_list:
         full_name = (x['person']['fullName'])
         player_id = str(x['person']['id'])
         if player_query != full_name:
+            #TODO: Put in a Try Again method for when there is no matching player on roster
             pass
         else:
+            
+            #Pulls up player's info.
             roster_api_player = "https://statsapi.web.nhl.com/api/v1/people/" + player_id
             player_json_data = requests.get(roster_api_player).json()
             individual_player = player_json_data['people']
@@ -116,6 +130,7 @@ def team_search():
             -20102011
             """)
 
+            #Pulls up chosen player's year stats.
             roster_api_stats = "https://statsapi.web.nhl.com/api/v1/people/" + player_id + "/stats?stats=statsSingleSeason&season=" + season
             player_stats_json_data = requests.get(roster_api_stats).json()
             individual_stats = player_stats_json_data['stats']
@@ -126,6 +141,9 @@ def team_search():
 
             for a in individual_player:
                 height = (a['height'])
+            
+            #If the player didn't play that year or has no stats, No Info is returned
+            #Otherwise, it prints up the player's name, ID number, Height, and a list of the player's stats
             if stat_list == '[]':
                 print("Sorry, There's no info on that year for that player.")
             else:
